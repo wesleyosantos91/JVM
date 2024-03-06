@@ -32,20 +32,20 @@
 </div>
 
 <!-- About the Project -->
-## :star2: Sobre o projeto
+## :star2: Sobre o projeto:
 <p>
     Este repositório destina-se a fornecer recursos e exemplos para estudar e entender a Máquina Virtual Java (JVM).</br>
     A JVM é um componente essencial da plataforma Java e é responsável por executar programas Java compilados em bytecode.
 </p>
 
 <!-- Screenshots -->
-### :camera: Memória JVM
+### :camera: Memória JVM:
 
 <div align="center"> 
   <img src="assets/00-jvm-memoria.png" alt="logo" width="600" height="auto" />
 </div>
 
-### Stack
+#### Stack:
 > A memória da pilha (stack) é usada para armazenar dados locais e referências a objetos para cada método em execução na JVM. Cada thread possui sua própria pilha de execução, onde são mantidos os registros de ativação e as variáveis locais. As variáveis locais e referências a objetos são removidas automaticamente quando o método é concluído, o que torna a memória da pilha eficiente para gerenciamento de memória temporária e rápida alocação e desalocação de recursos.
 > - Área de memória usada para armazenar variáveis locais e informações de chamada de método.
 > - Cada thread possui sua própria stack, que cresce e diminui à medida que métodos são chamados e retornados.
@@ -61,8 +61,7 @@
 
 Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode substituir 1m pelo tamanho desejado em megabytes.
 
-### Heap
-
+#### Heap:
 > O heap é a área de memória compartilhada entre todas as threads em uma aplicação Java, utilizada para armazenar objetos e arrays dinamicamente alocados. Ele é gerenciado pelo coletor de lixo (GC) da JVM, que é responsável por liberar a memória de objetos não utilizados para evitar vazamentos de memória. O heap é dividido em duas partes principais: a geração nova (young generation) e a geração antiga (old generation), que são utilizadas para otimizar o processo de coleta de lixo.
 > - Área de memória usada para alocar objetos dinamicamente.
 > - Compartilhado por todas as threads da aplicação.
@@ -81,7 +80,7 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 
 -Xmx: Este parâmetro especifica o tamanho máximo da memória que a JVM pode alocar para o heap durante a execução do programa. Se você definir -Xmx1024m, isso significa que a JVM pode alocar até 1024 megabytes de memória para o heap durante a execução do programa.
 
-### Metaspace
+#### Metaspace:
 > A Metaspace é uma área de memória na JVM que substitui permanentemente a área de PermGen (geração permanente) nas versões mais recentes do Java. Ela é responsável por armazenar metadados relacionados a classes, como informações sobre classes carregadas, métodos, constantes e estruturas de dados internas da JVM. Ao contrário da PermGen, a Metaspace é dimensionada dinamicamente pela JVM e pode crescer ou diminuir conforme a necessidade, o que reduz a probabilidade de erros de alocação de memória relacionados à área de metadados.
 > - Introduzido na versão 8 do Java.
 > - Substituiu o PermGen.
@@ -95,3 +94,71 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 ```bash
   java -XX:MaxMetaspaceSize=256m Main.java
 ```
+
+### GC - Garbage Collection (Coletor de lixo)
+
+> O Garbage Collection (GC) é um processo automático da JVM (Java Virtual Machine) responsável por identificar e liberar memória de objetos que não estão mais sendo utilizados pela aplicação. Isso evita vazamentos de memória, que podem levar a problemas de desempenho e estabilidade.
+
+#### O que GC pode evitar:
+
+##### Memory Leak:
+> Imagine que você tem uma torneira que fica pingando água constantemente, mas você nunca fecha. Com o tempo, a água vai se acumulando e eventualmente transborda, causando desperdício. Da mesma forma, um "memory leak" ocorre quando um programa continua alocando memória sem liberá-la, o que pode levar a problemas de desempenho ou até mesmo ao travamento do programa.
+
+##### Dangling Pointer:
+> Agora, imagine que você anote o endereço de um lugar em um papel, mas esse lugar é demolido antes que você tenha a chance de usá-lo. Se você olhar para o papel, você ainda terá o endereço, mas ele não leva a lugar nenhum. Isso é como um "dangling pointer", que ocorre quando um programa usa um endereço de memória que já foi liberado, resultando em comportamento imprevisível ou até mesmo falhas.
+
+#### Tipos de algoritimos GC:
+
+> 
+
+##### Java 8
+- Parallel GC (default)
+  - Projetado para alto rendimento (throughput) em sistemas multiprocessados
+  - Divide o heap em regiões e coleta cada região em paralelo usando várias threads.
+  - Adequado para aplicações que necessitam de alto throughput e não sofrem muito com pausas curtas na garbage collection.
+- Serial GC
+  - Coletor de lixo mais simples, utiliza apenas uma thread.
+  - Adequado para aplicações single-threaded ou com recursos limitados, pois tem baixo overhead.
+- CMS GC
+  - Coletor de lixo "concurrent", permitindo que a aplicação continue executando durante a coleta de lixo.
+  - Minimiza o tempo de parada da aplicação, mas pode ter um impacto maior no rendimento geral.
+  - Adequado para aplicações sensíveis à latência que necessitam de pausas curtas e previsíveis na garbage collection.
+
+##### Java 11
+- G1 GC (default)
+  - Coletor de lixo de última geração, oferecendo melhor performance e escalabilidade.
+  - Divide o heap em regiões de diferentes tamanhos e coleta cada região de forma independente.
+  - Adapta-se dinamicamente às necessidades da aplicação, priorizando regiões com maior probabilidade de conter objetos inutilizados.
+  - Adequado para uma ampla gama de aplicações, desde aplicações single-threaded até aplicações multiprocessadas com cargas de memória variáveis.
+- Serial GC
+  - (Mesma descrição do Java 8)
+- Shenandoah GC (experimental)
+  - Coletor de lixo experimental projetado para aplicações com grandes conjuntos de dados.
+  - Utiliza um algoritmo de "copying", copiando objetos sobreviventes para uma nova região do heap e liberando a memória da região antiga.
+  - Pode ser benéfico para aplicações que alocam e desalocam grandes quantidades de dados, mas pode ter um overhead maior em comparação ao G1 GC.
+- ZGC (experimental)
+  - Coletor de lixo experimental focado em baixa latência.
+  - Utiliza um algoritmo de "region-based memory management", gerenciando o heap em regiões e coletando cada região individualmente.
+  - Projetado para minimizar o tempo gasto em pausas durante a coleta de lixo, geralmente abaixo de 1 milissegundo.
+  - Adequado para aplicações críticas à latência, como sistemas em tempo real ou processamento de alta frequência, mas requer testes rigorosos devido ao seu estado experimental.
+
+##### Java 17
+- G1 GC (default)
+  - (Mesma descrição do Java 11)
+- Serial GC
+  - (Mesma descrição do Java 8)
+- Shenandoah GC (experimental)
+  - (Mesma descrição do Java 11)
+- ZGC (experimental)
+  - (Mesma descrição do Java 11)
+
+##### Java 21
+- G1 GC (default)
+  - (Mesma descrição do Java 11)
+- Serial GC
+  - (Mesma descrição do Java 8)
+- Shenandoah GC (experimental)
+  - (Mesma descrição do Java 11)
+- ZGC (experimental)
+  - (Mesma descrição do Java 11)
+
