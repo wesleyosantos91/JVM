@@ -109,8 +109,6 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 
 #### Tipos de algoritimos GC:
 
-> 
-
 ##### Java 8
 - Parallel GC (default)
   - Projetado para alto rendimento (throughput) em sistemas multiprocessados
@@ -123,6 +121,24 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
   - Coletor de lixo "concurrent", permitindo que a aplicação continue executando durante a coleta de lixo.
   - Minimiza o tempo de parada da aplicação, mas pode ter um impacto maior no rendimento geral.
   - Adequado para aplicações sensíveis à latência que necessitam de pausas curtas e previsíveis na garbage collection.
+
+> Exemplo usando o Parallel GC:
+
+```bash
+  java -XX:+UseSerialGC Main
+```
+
+> Exemplo usando o Serial GC:
+
+```bash
+  java -XX:+UseSerialGC Main
+```
+
+> Exemplo usando o CMS GC:
+
+```bash
+  java -XX:+UseConcMarkSweepGC Main
+```
 
 ##### Java 11
 - G1 GC (default)
@@ -141,6 +157,24 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
   - Utiliza um algoritmo de "region-based memory management", gerenciando o heap em regiões e coletando cada região individualmente.
   - Projetado para minimizar o tempo gasto em pausas durante a coleta de lixo, geralmente abaixo de 1 milissegundo.
   - Adequado para aplicações críticas à latência, como sistemas em tempo real ou processamento de alta frequência, mas requer testes rigorosos devido ao seu estado experimental.
+
+> Exemplo usando o G1 GC:
+
+```bash
+  java -XX:+UseG1GC Main
+```
+
+> Exemplo usando o Shenandoah GC (experimental):
+
+```bash
+  java -XX:+UseShenandoahGC Main
+```
+
+> Exemplo usando o ZGC (experimental):
+
+```bash
+  java -XX:+UseZGC Main
+```
 
 ##### Java 17
 - G1 GC (default)
