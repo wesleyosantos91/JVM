@@ -52,11 +52,14 @@
 > - Armazena tipos de dados primitivos (int, float, etc.) e referências a objetos.
 > - Tamanho geralmente menor que o heap.
 
-Exemplo de configuração da memória Stack:
-<br>obs: essa configuração normalmente não é utilizada.
+> Exemplo de configuração da memória Stack:
+<br> obs: essa configuração normalmente não é utilizada.
+
 ```bash
-  java -Xms128m -Xmx512m Main.java
+  java -Xss1m Main.java
 ```
+
+Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode substituir 1m pelo tamanho desejado em megabytes.
 
 ### Heap
 
@@ -66,7 +69,8 @@ Exemplo de configuração da memória Stack:
 > - Gerenciado pelo coletor de lixo.
 > - Tamanho pode ser configurado e ajustado.
 
-Exemplo de configuração da memória Heap:
+> Exemplo de configuração da memória Heap:
+
 ```bash
   java -Xms128m -Xmx512m Main.java
 ```
@@ -84,3 +88,10 @@ Exemplo de configuração da memória Heap:
 > - Armazena metadados da JVM, como classes, métodos e strings.
 > - Tamanho não é fixo e pode crescer dinamicamente.
 > - Monitoramento de uso é importante para evitar OutOfMemoryError.
+
+> Exemplo de configuração da memória Metaspace:
+<br> obs: essa configuração normalmente não é utilizada.
+
+```bash
+  java -XX:MaxMetaspaceSize=256m Main.java
+```
