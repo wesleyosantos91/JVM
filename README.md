@@ -38,8 +38,14 @@
 </p>
 
 <!-- Screenshots -->
-### :camera: Meméria JVM
+### :camera: Memória JVM
 
 <div align="center"> 
   <img src="assets/00-jvm-memoria.png" alt="logo" width="600" height="auto" />
 </div>
+
+### Stack
+
+### Heap
+
+### Metaspace
