@@ -29,6 +29,7 @@
 </p>
    
 <br />
+</div>
 
 <!-- About the Project -->
 ## :star2: Sobre o projeto
@@ -52,11 +53,13 @@
 > - Tamanho geralmente menor que o heap.
 
 ### Heap
+
 > O heap é a área de memória compartilhada entre todas as threads em uma aplicação Java, utilizada para armazenar objetos e arrays dinamicamente alocados. Ele é gerenciado pelo coletor de lixo (GC) da JVM, que é responsável por liberar a memória de objetos não utilizados para evitar vazamentos de memória. O heap é dividido em duas partes principais: a geração nova (young generation) e a geração antiga (old generation), que são utilizadas para otimizar o processo de coleta de lixo.
-> - Área de memória usada para alocar objetos dinamicamente.
+> - Área de memória usada para alocar objetos dinamicamente.>
 > - Compartilhado por todas as threads da aplicação.
 > - Gerenciado pelo coletor de lixo.
-> - Tamanho pode ser configurado e ajustado. 
+> - Tamanho pode ser configurado e ajustado.
+
 
 ### Metaspace
 > A Metaspace é uma área de memória na JVM que substitui permanentemente a área de PermGen (geração permanente) nas versões mais recentes do Java. Ela é responsável por armazenar metadados relacionados a classes, como informações sobre classes carregadas, métodos, constantes e estruturas de dados internas da JVM. Ao contrário da PermGen, a Metaspace é dimensionada dinamicamente pela JVM e pode crescer ou diminuir conforme a necessidade, o que reduz a probabilidade de erros de alocação de memória relacionados à área de metadados.
