@@ -52,14 +52,30 @@
 > - Armazena tipos de dados primitivos (int, float, etc.) e referências a objetos.
 > - Tamanho geralmente menor que o heap.
 
+Exemplo de configuração da memória Stack:
+<br>obs: essa configuração normalmente não é utilizada.
+```bash
+  java -Xms128m -Xmx512m Main.java
+```
+
 ### Heap
 
 > O heap é a área de memória compartilhada entre todas as threads em uma aplicação Java, utilizada para armazenar objetos e arrays dinamicamente alocados. Ele é gerenciado pelo coletor de lixo (GC) da JVM, que é responsável por liberar a memória de objetos não utilizados para evitar vazamentos de memória. O heap é dividido em duas partes principais: a geração nova (young generation) e a geração antiga (old generation), que são utilizadas para otimizar o processo de coleta de lixo.
-> - Área de memória usada para alocar objetos dinamicamente.>
+> - Área de memória usada para alocar objetos dinamicamente.
 > - Compartilhado por todas as threads da aplicação.
 > - Gerenciado pelo coletor de lixo.
 > - Tamanho pode ser configurado e ajustado.
 
+Exemplo de configuração da memória Heap:
+```bash
+  java -Xms128m -Xmx512m Main.java
+```
+
+-Xms e -Xmx são parâmetros de linha de comando usados para especificar o tamanho inicial e máximo da memória alocada para a JVM (Java Virtual Machine).
+
+-Xms: Este parâmetro especifica o tamanho inicial da memória que será alocada para o heap da JVM no momento em que a JVM é iniciada. Por exemplo, se você definir -Xms512m, isso significa que a JVM será iniciada com 512 megabytes de memória alocada para o heap.
+
+-Xmx: Este parâmetro especifica o tamanho máximo da memória que a JVM pode alocar para o heap durante a execução do programa. Se você definir -Xmx1024m, isso significa que a JVM pode alocar até 1024 megabytes de memória para o heap durante a execução do programa.
 
 ### Metaspace
 > A Metaspace é uma área de memória na JVM que substitui permanentemente a área de PermGen (geração permanente) nas versões mais recentes do Java. Ela é responsável por armazenar metadados relacionados a classes, como informações sobre classes carregadas, métodos, constantes e estruturas de dados internas da JVM. Ao contrário da PermGen, a Metaspace é dimensionada dinamicamente pela JVM e pode crescer ou diminuir conforme a necessidade, o que reduz a probabilidade de erros de alocação de memória relacionados à área de metadados.
