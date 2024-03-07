@@ -42,7 +42,7 @@
 ### :camera: Memória JVM:
 
 <div align="center"> 
-  <img src="assets/00-jvm-memoria.png" alt="logo" width="600" height="auto" />
+  <img src="assets/00-jvm-memoria.png" alt="imagem demonstrando separacao da memoria stack, heap e metaspace" width="600" height="auto" />
 </div>
 
 #### Stack:
