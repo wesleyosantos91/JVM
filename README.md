@@ -196,3 +196,46 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 - ZGC (experimental)
   - (Mesma descrição do Java 11)
 
+### Ferramentas de troubleshooting em Aplicações sobre a JVM
+
+#### Heap Dump e Thread Dump: Revelando o que acontece dentro da sua aplicação:
+
+##### 1. Heap Dump: 
+> Um heap dump é uma "fotografia" detalhada da memória de um programa em um determinado momento. Ele contém informações sobre todos os objetos presentes na memória, suas referências e seus tamanhos. O heap dump é útil para identificar vazamentos de memória, ou seja, situações em que a aplicação está alocando mais memória do que deveria e não liberando-a adequadamente, o que pode causar lentidão ou falhas no sistema.
+
+##### 2. Thread Dump:
+> Já um thread dump é um instantâneo do estado de todas as threads em execução em um programa Java. Ele mostra quais threads estão ativas, quais estão bloqueadas aguardando por recursos e onde estão no código fonte. O thread dump é uma ferramenta valiosa para diagnosticar problemas de concorrência, como deadlocks (situações em que duas ou mais threads estão bloqueadas indefinidamente aguardando por recursos que a outra tem) e condições de corrida (quando duas ou mais threads tentam acessar recursos compartilhados simultaneamente, resultando em comportamento imprevisível).
+
+
+##### Tabela com detalhes:
+
+| Tipo de Dump        | O que captura             | Uso                                                                                              |
+|---------------------|---------------------------|--------------------------------------------------------------------------------------------------|
+| Heap Dump           | Memória heap              | Diagnosticar vazamentos de memória, analisar estado de objetos, identificar objetos grandes.     |
+| Thread Dump         | Estado de todas as threads| Diagnosticar problemas de threads, analisar fluxo de execução, identificar threads bloqueadas.   |
+
+<br>
+
+#### Ferramentas:
+
+- [VisualVM](https://visualvm.github.io/index.html) : 
+O VisualVM é uma ferramenta de monitoramento e análise de desempenho para aplicativos Java. Ele fornece uma interface gráfica intuitiva para acompanhar o consumo de memória, a utilização da CPU, o comportamento da thread e outras métricas importantes durante a execução de uma aplicação Java. Além disso, o VisualVM oferece recursos de perfil de desempenho, permitindo identificar gargalos e otimizar o código para melhorar a eficiência e o desempenho do aplicativo. Em suma, o VisualVM é uma ferramenta valiosa para desenvolvedores Java entenderem e otimizarem o desempenho de seus aplicativos durante o desenvolvimento e a manutenção.</br>
+O VisualVM também é capaz de auxiliar na análise de heap dumps e thread dumps, permitindo aos desenvolvedores identificar vazamentos de memória, problemas de concorrência e outras questões relacionadas à gestão de memória e ao comportamento das threads em aplicativos Java. Esses recursos adicionais são fundamentais para a resolução de problemas complexos de desempenho e estabilidade em aplicações Java.
+
+- [Jstack -  Java Thread Dump Analyzer (JTDA)](jstack.review) : 
+O Java Thread Dump Analyzer, ou jstack, é uma ferramenta do JDK usada para diagnosticar problemas de desempenho em aplicações Java. Ela gera e analisa despejos de threads, oferecendo insights sobre o estado das threads, monitores bloqueados e outros aspectos relacionados à concorrência. Além disso, o jstack lê o thread dump, fornecendo aos desenvolvedores informações cruciais para identificar e resolver problemas como deadlocks e gargalos de desempenho. É uma ferramenta essencial para garantir a estabilidade e eficiência das aplicações Java.
+
+##### Tabela com detalhes:
+
+| Ferramenta                            | Funcionalidades                                                                                                       |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Java Thread Dump Analyzer (JTDA)      | - Visualização de threads - Identificação de deadlocks - Análise de stack traces - Filtragem e agrupamento de threads |
+| Jstack                                | - Obtenção de thread dumps - Identificação de threads bloqueadas - Análise de stack traces                            |
+
+##### Alternativas de ferramentas:
+- Ferramenta de monitoramento e análise de desempenho para aplicativos Java
+  - [GCEasy](https://gceasy.io/)
+  - [Jprofile](https://www.ej-technologies.com/products/jprofiler/overview.html)
+- Java Thread Dump Analyzer (JTDA)
+  - [FastThread](https://fastthread.io/)
+  - [SpotifyThreadDump](https://spotify.github.io/threaddump-analyzer/)
