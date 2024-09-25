@@ -237,8 +237,7 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 - C2 (Server Compiler) realiza otimizações mais agressivas e profundas, relacionadas aos níveis 3 e 4, aplicando técnicas de otimização avançadas para maximizar o desempenho de métodos "quentes" (executados frequentemente) e mais críticos..
 
 #### Ahead-Of-Time (AOT):
-> TODO:
-
+> A compilação Ahead-of-Time (AOT) é uma abordagem alternativa à JIT, onde o código Java é traduzido para código de máquina nativo antes da execução do programa, geralmente durante o processo de build. Isso elimina a necessidade de compilação em tempo de execução, resultando em tempos de inicialização mais rápidos e um desempenho mais consistente, especialmente em dispositivos com recursos limitados ou em cenários onde a latência é crítica. No entanto, a AOT pode aumentar o tamanho do executável e limitar algumas otimizações dinâmicas que a JIT pode realizar. A escolha entre AOT e JIT depende das necessidades específicas da aplicação e do ambiente de execução.
 
 ### Ferramentas de troubleshooting em Aplicações sobre a JVM
 
