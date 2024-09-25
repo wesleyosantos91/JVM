@@ -233,8 +233,8 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 > Compiladores C1 e C2:
 > A JVM geralmente possui dois compiladores JIT:
 
-- C1 (Client Compiler): Focado em compilação rápida com otimizações básicas. Geralmente utilizado para inicialização rápida de aplicações e métodos com poucas chamadas.
-- C2 (Server Compiler): Focado em otimizações agressivas para obter o máximo desempenho em longo prazo. Geralmente utilizado para métodos quentes (executados com frequência) e críticos para o desempenho.
+- C1 (Client Compiler) é responsável por otimizações mais simples e rápidas, correspondendo principalmente aos níveis 1 e 2, otimizando o código de maneira mais leve, visando um tempo de inicialização rápido e eficiência em métodos que não são tão críticos para o desempenho a longo prazo.
+- C2 (Server Compiler) realiza otimizações mais agressivas e profundas, relacionadas aos níveis 3 e 4, aplicando técnicas de otimização avançadas para maximizar o desempenho de métodos "quentes" (executados frequentemente) e mais críticos..
 
 #### Ahead-Of-Time (AOT):
 > TODO:
