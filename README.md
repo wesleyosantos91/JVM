@@ -196,6 +196,50 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 - ZGC (experimental)
   - (Mesma descrição do Java 11)
 
+
+### JVM: Compilação Just-In-Time (JIT) e Ahead-Of-Time (AOT)
+
+#### Just In Time (JIT) Compilation:  
+> A JVM inicialmente executa o código Java como um interpretador, o que pode ser mais lento do que linguagens compiladas nativamente como C. Para melhorar o desempenho, a JVM usa a compilação Just-in-Time (JIT), que traduz partes do código Java para código de máquina nativo durante a execução. A JVM identifica as partes do código mais usadas ("hotspots") e as compila, acelerando a execução. O processo de compilação JIT ocorre em segundo plano e não interrompe a execução do aplicativo. A compilação JIT permite que o código Java seja executado de forma mais eficiente, aproximando-se do desempenho de linguagens compiladas nativamente, sem perder a portabilidade do Java. É importante considerar o impacto da compilação JIT ao avaliar o desempenho do código, pois o desempenho pode variar antes e depois da compilação. A JVM pode compilar qualquer sequência de bytecode, que, do ponto de vista do programador, pode ser entendida como qualquer método ou bloco de código.
+
+> O parâmetro -XX:+PrintCompilation é uma ferramenta poderosa para entender e otimizar o desempenho da compilação JIT em aplicações Java. Ele fornece informações detalhadas sobre quais métodos estão sendo compilados e como, permitindo que você tome decisões informadas sobre otimizações de código e configurações da JVM.
+
+```bash
+  java -XX:+PrintCompilation Main
+```
+
+##### Exemplo:
+
+| Timestamp (ms) | Ordem | Flags | Nível de Otimização | Método | Tamanho (bytes) |
+|---|---|---|---|---|---|
+| 6896 | 86 | n | 0 | java.lang.StringLatin1::hashCode | 44 |
+| 6903 | 87 | s | 3 | java.lang.String::hashCode | 14 |
+| 6906 | 88 | % | 4 | sun.nio.cs.UTF_8::updatePositions | 410 |
+
+- N: Método nativo (implementado em linguagem de baixo nível)
+- S: Método sincronizado (usa bloqueio para garantir acesso exclusivo)
+- %: Método otimizado e armazenado no cache de código para execução mais rápida
+
+> Na saída da compilação JIT, o "Nível de Otimização" é um número de 0 a 4 que indica a intensidade das otimizações aplicadas pela JVM ao compilar um método para código de máquina nativo. Quanto maior o nível, mais agressivas e complexas são as otimizações, buscando maximizar o desempenho do código.
+
+> Significado dos níveis:
+
+- 0: Nenhuma otimização. O método é interpretado diretamente a partir do bytecode, sem compilação - JIT.
+- 1: Otimizações básicas e rápidas. A JVM aplica otimizações simples e de baixo custo, como eliminação de código morto e propagação de constantes.
+- 2: Otimizações intermediárias. A JVM aplica otimizações mais complexas, como inlining de métodos pequenos e eliminação de alocações desnecessárias.
+- 3: Otimizações avançadas. A JVM realiza análises mais profundas do código e aplica otimizações mais agressivas, como loop unrolling e otimizações baseadas em profiling.
+- 4: Otimizações mais avançadas. A JVM utiliza informações de profiling coletadas durante a execução para aplicar otimizações altamente específicas e direcionadas ao comportamento do código em tempo real.
+
+> Compiladores C1 e C2:
+> A JVM geralmente possui dois compiladores JIT:
+
+- C1 (Client Compiler): Focado em compilação rápida com otimizações básicas. Geralmente utilizado para inicialização rápida de aplicações e métodos com poucas chamadas.
+- C2 (Server Compiler): Focado em otimizações agressivas para obter o máximo desempenho em longo prazo. Geralmente utilizado para métodos quentes (executados com frequência) e críticos para o desempenho.
+
+#### Ahead-Of-Time (AOT):
+> TODO:
+
+
 ### Ferramentas de troubleshooting em Aplicações sobre a JVM
 
 #### Heap Dump e Thread Dump: Revelando o que acontece dentro da sua aplicação:
@@ -222,7 +266,7 @@ Neste exemplo, -Xss1m define o tamanho da pilha como 1 megabyte. Você pode subs
 O VisualVM é uma ferramenta de monitoramento e análise de desempenho para aplicativos Java. Ele fornece uma interface gráfica intuitiva para acompanhar o consumo de memória, a utilização da CPU, o comportamento da thread e outras métricas importantes durante a execução de uma aplicação Java. Além disso, o VisualVM oferece recursos de perfil de desempenho, permitindo identificar gargalos e otimizar o código para melhorar a eficiência e o desempenho do aplicativo. Em suma, o VisualVM é uma ferramenta valiosa para desenvolvedores Java entenderem e otimizarem o desempenho de seus aplicativos durante o desenvolvimento e a manutenção.</br>
 O VisualVM também é capaz de auxiliar na análise de heap dumps e thread dumps, permitindo aos desenvolvedores identificar vazamentos de memória, problemas de concorrência e outras questões relacionadas à gestão de memória e ao comportamento das threads em aplicativos Java. Esses recursos adicionais são fundamentais para a resolução de problemas complexos de desempenho e estabilidade em aplicações Java.
 
-- [Jstack -  Java Thread Dump Analyzer (JTDA)](jstack.review) : 
+- [Jstack -  Java Thread Dump Analyzer (JTDA)](https://jstack.review) : 
 O Java Thread Dump Analyzer, ou jstack, é uma ferramenta do JDK usada para diagnosticar problemas de desempenho em aplicações Java. Ela gera e analisa despejos de threads, oferecendo insights sobre o estado das threads, monitores bloqueados e outros aspectos relacionados à concorrência. Além disso, o jstack lê o thread dump, fornecendo aos desenvolvedores informações cruciais para identificar e resolver problemas como deadlocks e gargalos de desempenho. É uma ferramenta essencial para garantir a estabilidade e eficiência das aplicações Java.
 
 ##### Tabela com detalhes:
