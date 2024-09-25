@@ -268,6 +268,8 @@ O VisualVM também é capaz de auxiliar na análise de heap dumps e thread dumps
 - [Jstack -  Java Thread Dump Analyzer (JTDA)](https://jstack.review) : 
 O Java Thread Dump Analyzer, ou jstack, é uma ferramenta do JDK usada para diagnosticar problemas de desempenho em aplicações Java. Ela gera e analisa despejos de threads, oferecendo insights sobre o estado das threads, monitores bloqueados e outros aspectos relacionados à concorrência. Além disso, o jstack lê o thread dump, fornecendo aos desenvolvedores informações cruciais para identificar e resolver problemas como deadlocks e gargalos de desempenho. É uma ferramenta essencial para garantir a estabilidade e eficiência das aplicações Java.
 
+- [Java Mission Control (JMC)](https://jdk.java.net/jmc/9/): O Java Mission Control é uma ferramenta de monitoramento e análise de desempenho desenvolvida pela Oracle, projetada para ajudar os desenvolvedores a gerenciar e otimizar suas aplicações Java. Ele oferece uma interface gráfica para visualizar dados de execução em tempo real, além de permitir a coleta e análise de dados de profiling através de eventos e métricas do sistema. O JMC é particularmente útil para identificar problemas de desempenho, como consumo excessivo de memória ou uso de CPU, e fornece funcionalidades avançadas, como a análise de heap dumps e a visualização de dados históricos. Essa ferramenta é integrada ao Java Flight Recorder, permitindo uma análise detalhada do comportamento da aplicação, tornando-a valiosa para diagnosticar e resolver problemas de desempenho em ambientes de produção.
+
 ##### Tabela com detalhes:
 
 | Ferramenta                            | Funcionalidades                                                                                                       |
